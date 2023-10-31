@@ -15,6 +15,7 @@ namespace StarterAssets
 		public bool aim;
 		public bool shoot;
 		public bool secondaryFire;
+		public bool start;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -61,6 +62,12 @@ namespace StarterAssets
 		{
 			SecondaryFireInput(value.isPressed);
 		}
+
+		public void OnStart(InputValue value)
+		{
+			Debug.Log("OnStart triggered with value: " + value);
+			StartInput(value.isPressed);
+		}
 #endif
 
 
@@ -99,14 +106,21 @@ namespace StarterAssets
 			secondaryFire = newSecondaryFireState;
 		}
 
+		public void StartInput(bool newStartState)
+		{
+			Debug.Log("StartInput triggered with value: " + newStartState);
+			start = newStartState;
+		}
+
 		private void OnApplicationFocus(bool hasFocus)
 		{
 			SetCursorState(cursorLocked);
 		}
 
-		private void SetCursorState(bool newState)
+		public void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
+			Cursor.visible = newState;
 		}
 	}
 	
