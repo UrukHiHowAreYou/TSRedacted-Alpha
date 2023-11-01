@@ -139,6 +139,10 @@ namespace StarterAssets
 
         private void Start()
         {
+            //subscribe to the onGame(Un)Paused Event
+            GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
+            GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnPaused;
+
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
             _hasAnimator = TryGetComponent(out _animator);
@@ -156,6 +160,9 @@ namespace StarterAssets
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
         }
+
+        public void GameManager_OnGamePaused(object sender, System.EventArgs e) { _input.cursorInputForLook = false; _input.SetCursorState(false); }
+        public void GameManager_OnGameUnPaused(object sender, System.EventArgs e) { _input.cursorInputForLook = true; _input.SetCursorState(true); }
 
         private void Update()
         {
