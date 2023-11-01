@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 4240594708442156082}
   - component: {fileID: 2018555352080327918}
   - component: {fileID: 437575111449140479}
-  - component: {fileID: 6711422574870020859}
   - component: {fileID: 5678122822265233361}
   m_Layer: 0
   m_Name: Sphere
@@ -168,24 +167,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6711422574870020859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7760499898699308387}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8598a49194a70704388fd3d68c070f55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vfxHitGreen: {fileID: 0}
-  vfxHitRed: {fileID: 0}
-  explosionAudioClip: {fileID: 0}
-  metalbouncAudioClip: {fileID: 0}
-  speed: 10
-  destroyOnCollision: 1
 --- !u!135 &5678122822265233361
 SphereCollider:
   m_ObjectHideFlags: 0
