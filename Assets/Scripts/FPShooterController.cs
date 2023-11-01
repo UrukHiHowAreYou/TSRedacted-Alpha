@@ -27,6 +27,7 @@ public class FPShooterController : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private Animator animator;
 
+
     private void Awake() {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -94,14 +95,20 @@ public class FPShooterController : MonoBehaviour
                     // Hit something else
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitRed, debugTransform.position, Quaternion.identity);
-                    // plays hit marker sfx at player position with volume of 1
-                    AudioSource.PlayClipAtPoint(hitwallAudioClip, transform.position, 1);
+                    // plays hit marker sfx at player position with volume of 1 at the wall position
+                    AudioSource.PlayClipAtPoint(hitwallAudioClip, hitTransform.position, 1);
                 }
             }
             
             
             // this stops firing after 1 shot
             starterAssetsInputs.shoot = false;
+        }
+
+        // Hi ADAM, this conditional detects whether pause has been pressed
+        if (starterAssetsInputs.start) {
+            GameManager.Instance.TogglePauseGame();
+            starterAssetsInputs.start = false;
         }
 
         // Hi Ryan, this conditional detects whether secondary fire has been fired
