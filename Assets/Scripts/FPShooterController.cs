@@ -82,7 +82,7 @@ public class FPShooterController : MonoBehaviour
         // Hi Ryan, this conditional detects whether shoot has been fired
         if (starterAssetsInputs.shoot) {
             
-            AudioSource.PlayClipAtPoint(gunshot02AudioClip, transform.position, 1);
+            SoundManager.Instance.PlayGunshotSound(transform.position);
             if(hitTransform != null) {
                 // Hit something
                 if (hitTransform.GetComponent<BulletTarget>() != null) {
@@ -90,13 +90,13 @@ public class FPShooterController : MonoBehaviour
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitGreen, debugTransform.position, Quaternion.identity);
                     // plays hit marker sfx at player position with volume of 1
-                    AudioSource.PlayClipAtPoint(hitmarkerAudioClip, transform.position, 1);
+                    SoundManager.Instance.PlayHitMarkerSound(transform.position);
                 } else {
                     // Hit something else
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitRed, debugTransform.position, Quaternion.identity);
                     // plays hit marker sfx at player position with volume of 1 at the wall position
-                    AudioSource.PlayClipAtPoint(hitwallAudioClip, hitTransform.position, 1);
+                    SoundManager.Instance.PlayHitWallSound(hitTransform.position);
                 }
             }
             

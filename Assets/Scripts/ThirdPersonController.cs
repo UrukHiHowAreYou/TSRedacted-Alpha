@@ -16,20 +16,22 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        [SerializeField] private float MoveSpeedBase = 4.0f;
+        private float MoveSpeed = 4.0f;
 
         [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
+        [SerializeField] private float SprintSpeedBase = 7f;
+        private float SprintSpeed =7f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
-        public float RotationSmoothTime = 0.12f;
+        [SerializeField] private float RotationSmoothTime = 0.12f;
 
         [Tooltip("Acceleration and deceleration")]
-        public float SpeedChangeRate = 10.0f;
+        [SerializeField] private float SpeedChangeRate = 10.0f;
 
         [Tooltip("Aim sensitivity")]
-        public float Sensitivity = 1f;
+        [SerializeField] private float Sensitivity = 1f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -37,27 +39,27 @@ namespace StarterAssets
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
-        public float JumpHeight = 1.2f;
+        [SerializeField] private float JumpHeight = 1.2f;
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
-        public float Gravity = -15.0f;
+        [SerializeField] private float Gravity = -15.0f;
 
         [Space(10)]
         [Tooltip("Time required to pass before being able to jump again. Set to 0f to instantly jump again")]
-        public float JumpTimeout = 0.50f;
+        [SerializeField] private float JumpTimeout = 0.3f;
 
         [Tooltip("Time required to pass before entering the fall state. Useful for walking down stairs")]
-        public float FallTimeout = 0.15f;
+        [SerializeField] private float FallTimeout = 0.15f;
 
         [Header("Player Grounded")]
         [Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
-        public bool Grounded = true;
+        [SerializeField] private bool Grounded = true;
 
         [Tooltip("Useful for rough ground")]
-        public float GroundedOffset = -0.14f;
+        [SerializeField] private float GroundedOffset = -0.14f;
 
         [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-        public float GroundedRadius = 0.28f;
+        [SerializeField] private float GroundedRadius = 0.28f;
 
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
@@ -67,16 +69,16 @@ namespace StarterAssets
         public GameObject CinemachineCameraTarget;
 
         [Tooltip("How far in degrees can you move the camera up")]
-        public float TopClamp = 70.0f;
+        [SerializeField] private float TopClamp = 90.0f;
 
         [Tooltip("How far in degrees can you move the camera down")]
-        public float BottomClamp = -30.0f;
+        [SerializeField] private float BottomClamp = -35.0f;
 
         [Tooltip("Additional degress to override the camera. Useful for fine tuning camera position when locked")]
-        public float CameraAngleOverride = 0.0f;
+        [SerializeField] private float CameraAngleOverride = 0.0f;
 
         [Tooltip("For locking the camera position on all axis")]
-        public bool LockCameraPosition = false;
+        [SerializeField] private bool LockCameraPosition = false;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -109,7 +111,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
-        public bool _rotateOnMove = false;
+        [SerializeField] private bool _rotateOnMove = false;
 
         private const float _threshold = 0.01f;
 
@@ -142,6 +144,7 @@ namespace StarterAssets
             //subscribe to the onGame(Un)Paused Event
             GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
             GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnPaused;
+            GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
 
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
             
@@ -159,10 +162,27 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            Cursor.visible = false;
         }
 
-        public void GameManager_OnGamePaused(object sender, System.EventArgs e) { _input.cursorInputForLook = false; _input.SetCursorState(false); }
-        public void GameManager_OnGameUnPaused(object sender, System.EventArgs e) { _input.cursorInputForLook = true; _input.SetCursorState(true); }
+        public void GameManager_OnGamePaused(object sender, System.EventArgs e) { _input.cursorInputForLook = false; _input.SetCursorState(false); _input.MakeCursorVisible(true); }
+        public void GameManager_OnGameUnPaused(object sender, System.EventArgs e) { _input.cursorInputForLook = true; _input.SetCursorState(true); _input.MakeCursorVisible(false); }
+        public void GameManager_OnStateChanged(object sender, System.EventArgs e)
+        {
+            if (GameManager.Instance.IsGamePlaying())
+            {
+                SetMoveSpeed(1f);
+                Debug.Log("GamePlaying MoveSpeed: " + MoveSpeed);
+        
+            }
+            else
+            {
+                SetMoveSpeed(0f);
+                Debug.Log("GameStopped MoveSpeed: " + MoveSpeed);
+            }
+        
+        }
 
         private void Update()
         {
@@ -435,6 +455,12 @@ namespace StarterAssets
         public void SetSensitivity(float newSensitivity)
         {
             Sensitivity = newSensitivity;
+        }
+
+        public void SetMoveSpeed(float multiplyer)
+        {
+            MoveSpeed = MoveSpeedBase * multiplyer;
+            SprintSpeed = SprintSpeedBase * multiplyer;
         }
     }
 }

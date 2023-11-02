@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 
     private State state;
     private float countdownToStartTimer = 3f;
+    private float waitingToStartTimer = .2f;
     private float gamePlayingTimer;
     private float gamePlayingTimerMax = 200f;
     private bool isGamePaused = false;
@@ -39,26 +40,33 @@ public class GameManager : MonoBehaviour
  //       PlayerInput.Instance.OnInteractAction += PlayerInput_OnInteractAction;
 
         //FOR TESTING TRIGGER GAME TO START AUTOMATICALLY WITH NO COUNTDOWN
-        state = State.CountdownToStart;
-        Debug.Log("state: " + state);
-        OnStateChanged?.Invoke(this, EventArgs.Empty);
+        //state = State.WaitingToStart;
+        //Debug.Log("state: " + state);
+        //OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
  
-    private void PlayerInput_OnInteractAction(object sender, EventArgs e)
-    {
-        if (state == State.WaitingToStart)
-        {
-            state = State.CountdownToStart;
-            OnStateChanged?.Invoke(this, EventArgs.Empty);
-
-        }
-    }
+    //private void PlayerInput_OnInteractAction(object sender, EventArgs e)
+    //{
+    //    if (state == State.WaitingToStart)
+    //    {
+    //        state = State.CountdownToStart;
+    //        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    //
+    //    }
+    //}
     private void Update()
     {
         switch (state)
         {
             case State.WaitingToStart:
+                waitingToStartTimer -= Time.deltaTime;
+                if (waitingToStartTimer < 0f)
+                {
+                    state = State.CountdownToStart;
+                    Debug.Log("state: " + state);
+                    OnStateChanged?.Invoke(this, EventArgs.Empty);
+                }
                 break;
             case State.CountdownToStart:
                 countdownToStartTimer -= Time.deltaTime;

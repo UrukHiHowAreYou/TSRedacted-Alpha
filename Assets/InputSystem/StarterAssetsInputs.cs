@@ -1,6 +1,7 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 #endif
 
 namespace StarterAssets
@@ -120,8 +121,12 @@ namespace StarterAssets
 		public void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-			Cursor.visible = newState;
 		}
-	}
+
+        public void MakeCursorVisible(bool cursorVisibility)
+        {
+			Cursor.visible = cursorVisibility;
+        }
+    }
 	
 }

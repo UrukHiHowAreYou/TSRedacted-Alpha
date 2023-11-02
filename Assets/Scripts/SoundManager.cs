@@ -43,16 +43,35 @@ public class SoundManager : MonoBehaviour
     }
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
+        Debug.Log("playing sound with volume: " + volume);
         PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier * volume);
     }
     public void PlayCountdownSound(int countdownNumber)
     {
         PlaySound(audioClipRefsSO.threeTwoOne[countdownNumber], Vector3.zero);
     }
-//    public void PlayWarningSound(Vector3 position)
-//    {
-//        PlaySound(audioClipRefsSO.warning, position);
-//    }
+    //    public void PlayWarningSound(Vector3 position)
+    //    {
+    //        PlaySound(audioClipRefsSO.warning, position);
+    //    }
+
+
+    public void PlayExplosionSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.explosion, position, volumeMultiplier);
+    }
+    public void PlayGunshotSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.shot, position, volumeMultiplier);
+    }
+    public void PlayHitMarkerSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.hit, position, volumeMultiplier);
+    }
+    public void PlayHitWallSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.hitWall, position, volumeMultiplier);
+    }
 
     public void ChangeVolume()
     {
