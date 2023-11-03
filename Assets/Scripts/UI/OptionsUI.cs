@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using StarterAssets;
 
 public class OptionsUI : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public class OptionsUI : MonoBehaviour
     //[SerializeField] private Button moveRightButton;
     //[SerializeField] private Button moveLeftButton;
     //[SerializeField] private Button interactButton;
-    //[SerializeField] private Button interactAlternateButton;
+    [SerializeField] private Button shootButton;
     //[SerializeField] private Button pauseButton;
     //[SerializeField] private Button gamepadInteractButton;
     //[SerializeField] private Button gamepadInteractAlternateButton;
@@ -33,7 +34,7 @@ public class OptionsUI : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI moveLeftText;
     //[SerializeField] private TextMeshProUGUI moveRightText;
     //[SerializeField] private TextMeshProUGUI interactText;
-    //[SerializeField] private TextMeshProUGUI interactAlternateText;
+    [SerializeField] private TextMeshProUGUI shootText;
     //[SerializeField] private TextMeshProUGUI pauseText;
     //[SerializeField] private TextMeshProUGUI gamepadInteractText;
     //[SerializeField] private TextMeshProUGUI gamepadInteractAlternateText;
@@ -64,7 +65,7 @@ public class OptionsUI : MonoBehaviour
         //moveLeftButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Left); });
         //moveRightButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Right); });
         //interactButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Interact); });
-        //interactAlternateButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.InteractAlternate); });
+        shootButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Shoot); });
         //pauseButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Pause); });
         //gamepadInteractButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_Interact); });
         //gamepadInteractAlternateButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_InteractAlternate); });
@@ -86,6 +87,7 @@ public class OptionsUI : MonoBehaviour
 
     private void UpdateVisual()
     {
+        Debug.Log("updating Visual");
         soundEffectsText.text = "Sound Effects: " + Mathf.Round(SoundManager.Instance.GetVolume() * 10f);
         musicText.text = "Music: " + Mathf.Round(MusicManager.Instance.GetVolume() * 10f);
 
@@ -97,7 +99,7 @@ public class OptionsUI : MonoBehaviour
         //interactAlternateText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.InteractAlternate);
         //pauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Pause);
         //gamepadInteractText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Interact);
-        //gamepadInteractAlternateText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_InteractAlternate);
+        shootText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Shoot);
         //gamepadPauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Pause);
     }
 
@@ -123,13 +125,15 @@ public class OptionsUI : MonoBehaviour
     //    pressToRebindKeyTransform.gameObject.SetActive(false);
     //}
 
-//    private void RebindBinding(PlayerInput.Binding binding)
-//    {
-//        ShowPressToRebindKeyTransform();
-//        PlayerInput.Instance.RebindBinding(binding, () => {
-//            HidePressToRebindKeyTransform();
-//            UpdateVisual();
-//        }
-//        );
-//    }
+    private void RebindBinding(StarterAssetsInputs.PlayerActions playerAction)
+    {
+        //soundEffectsText.text =
+        //ShowPressToRebindKeyTransform();
+        Debug.Log("REBIND BINDING");
+        StarterAssetsInputs.Instance.RebindBinding(playerAction, () => {
+            //HidePressToRebindKeyTransform();
+            UpdateVisual();
+        }
+        );
+    }
 }
