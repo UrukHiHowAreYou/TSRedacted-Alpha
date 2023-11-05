@@ -23,6 +23,10 @@ public class OptionsUI : MonoBehaviour
     //[SerializeField] private Button moveLeftButton;
     //[SerializeField] private Button interactButton;
     [SerializeField] private Button shootButton;
+    [SerializeField] private Button secondaryFireButton;
+    [SerializeField] private Button jumpButton;
+    [SerializeField] private Button sprintButton;
+    [SerializeField] private Button aimButton;
     //[SerializeField] private Button pauseButton;
     //[SerializeField] private Button gamepadInteractButton;
     //[SerializeField] private Button gamepadInteractAlternateButton;
@@ -35,6 +39,10 @@ public class OptionsUI : MonoBehaviour
     //[SerializeField] private TextMeshProUGUI moveRightText;
     //[SerializeField] private TextMeshProUGUI interactText;
     [SerializeField] private TextMeshProUGUI shootText;
+    [SerializeField] private TextMeshProUGUI secondaryFireText;
+    [SerializeField] private TextMeshProUGUI jumpText;
+    [SerializeField] private TextMeshProUGUI sprintText;
+    [SerializeField] private TextMeshProUGUI aimText;
     //[SerializeField] private TextMeshProUGUI pauseText;
     //[SerializeField] private TextMeshProUGUI gamepadInteractText;
     //[SerializeField] private TextMeshProUGUI gamepadInteractAlternateText;
@@ -66,6 +74,10 @@ public class OptionsUI : MonoBehaviour
         //moveRightButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Right); });
         //interactButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Interact); });
         shootButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Shoot); });
+        secondaryFireButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.SecondaryFire); });
+        aimButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Aim); });
+        sprintButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Sprint); });
+        jumpButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Jump); });
         //pauseButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Pause); });
         //gamepadInteractButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_Interact); });
         //gamepadInteractAlternateButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_InteractAlternate); });
@@ -100,6 +112,10 @@ public class OptionsUI : MonoBehaviour
         //pauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Pause);
         //gamepadInteractText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Interact);
         shootText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Shoot);
+        secondaryFireText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.SecondaryFire);
+        aimText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Aim);
+        sprintText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Sprint);
+        jumpText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Jump);
         //gamepadPauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Pause);
     }
 

@@ -8,10 +8,9 @@ using UnityEngine.InputSystem.LowLevel;
 namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
-	{
+    {
 
         public static StarterAssetsInputs Instance { get; private set; }
-        private PlayerInputActions playerInputActions;
         private const string PLAYER_PREFS_BINDINGS = "InputBindings";
 
         public enum PlayerActions
@@ -50,34 +49,32 @@ namespace StarterAssets
         private void Awake()
         {
             Instance = this;
-            //if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS))
-            //{
-            //    playerInputActions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_PREFS_BINDINGS));
-            //}
             playerInput = GetComponent<PlayerInput>();
-            playerInputActions = new PlayerInputActions();
+            if (PlayerPrefs.HasKey(PLAYER_PREFS_BINDINGS))
+            {
+                playerInput.actions.LoadBindingOverridesFromJson(PlayerPrefs.GetString(PLAYER_PREFS_BINDINGS));
+            }
         }
 
 		public string GetBindingText(PlayerActions playerAction)
         {
-            //string actionToRebind;
-            //int bindingIndex;
+            string actionToRebind;
+            int bindingIndex;
             switch (playerAction)
             {
                 default:
                 case PlayerActions.Shoot:
-                    return playerInputActions.Player.Shoot.bindings[0].ToDisplayString();
-                    //actionToRebind = "Shoot";
-                    //bindingIndex = 0;
+                    actionToRebind = "Shoot";
+                    bindingIndex = 0;
                     break;
-                //case PlayerActions.SecondaryFire:
-                //    actionToRebind = "SecondaryFire";
-                //    bindingIndex = 0;
-                //    break;
-                //case PlayerActions.Aim:
-                //    actionToRebind = "Aim";
-                //    bindingIndex = 3;
-                //    break;
+                case PlayerActions.SecondaryFire:
+                    actionToRebind = "SecondaryFire";
+                    bindingIndex = 0;
+                    break;
+                case PlayerActions.Aim:
+                    actionToRebind = "Aim";
+                    bindingIndex = 0;
+                    break;
                 //case PlayerActions.Forward:
                 //    actionToRebind = "Forward";
                 //    bindingIndex = 4;
@@ -94,43 +91,42 @@ namespace StarterAssets
                 //    actionToRebind = "Backward";
                 //    bindingIndex = 0;
                 //    break;
-                //case PlayerActions.Jump:
-                //    actionToRebind = "Jump";
-                //    bindingIndex = 0;
-                //    break;
-                //case PlayerActions.Start:
-                //    actionToRebind = "SecondStartaryFire";
-                //    bindingIndex = 0;
-                //    break;
-                //case PlayerActions.Sprint:
-                //    actionToRebind = "Sprint";
-                //    bindingIndex = 0;
-                //    break;
+                case PlayerActions.Jump:
+                    actionToRebind = "Jump";
+                    bindingIndex = 0;
+                    break;
+                case PlayerActions.Start:
+                    actionToRebind = "SecondStartaryFire";
+                    bindingIndex = 0;
+                    break;
+                case PlayerActions.Sprint:
+                    actionToRebind = "Sprint";
+                    bindingIndex = 0;
+                    break;
             }
-            //return playerInput.actions.FindAction(actionToRebind).GetBindingDisplayString(bindingIndex);
+            return playerInput.actions.FindAction(actionToRebind).GetBindingDisplayString(bindingIndex);
 
         }
 
         public void RebindBinding(PlayerActions playerAction, Action onActionRebound)
 		{
 
-            playerInputActions.Player.Disable();
             InputAction inputAction;
+            string actionToRebind;
             int bindingIndex;
             switch (playerAction)
             {
                 default:
                 case PlayerActions.Shoot:
-                    Debug.Log("The Shoot Case");
-                    inputAction = playerInputActions.Player.Shoot;
+                    actionToRebind = "Shoot";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.SecondaryFire:
-                    inputAction = playerInputActions.Player.SecondaryFire;
+                    actionToRebind = "SecondaryFire";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.Aim:
-                    inputAction = playerInputActions.Player.Aim;
+                    actionToRebind = "Aim";
                     bindingIndex = 0;
                     break;
                 //case PlayerActions.Forward:
@@ -150,33 +146,30 @@ namespace StarterAssets
                 //    bindingIndex = 0;
                 //    break;
                 case PlayerActions.Jump:
-                    inputAction = playerInputActions.Player.Jump;
+                    actionToRebind = "Jump";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.Start:
-                    inputAction = playerInputActions.Player.Start;
+                    actionToRebind = "Start";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.Sprint:
-                    inputAction = playerInputActions.Player.Sprint;
+                    actionToRebind = "Sprint";
                     bindingIndex = 0;
                     break;
             }
-            //foreach (var item in
-            Debug.Log("calling PerformInteractiveRebinding on inputAction "+ inputAction+" oon binding "+bindingIndex);
+
+            inputAction = playerInput.actions.FindAction(actionToRebind);
+            inputAction.Disable();
             inputAction.PerformInteractiveRebinding(bindingIndex).OnComplete(callback => {
                 Debug.Log("completed the rebinding");
                 callback.Dispose();
-                playerInputActions.Player.Enable();
+                inputAction.Enable();
                 onActionRebound();
-
-                Debug.Log(playerInputActions.SaveBindingOverridesAsJson());
-                PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, playerInputActions.SaveBindingOverridesAsJson());
+                Debug.Log(inputAction.SaveBindingOverridesAsJson());
+                PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, inputAction.SaveBindingOverridesAsJson());
                 PlayerPrefs.Save();
             }).Start();
-            //{
-			//	Debug.Log(item);   
-            //}
         }
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -184,7 +177,6 @@ namespace StarterAssets
 		{
 			MoveInput(value.Get<Vector2>());
 		}
-
 		public void OnLook(InputValue value)
 		{
 			if(cursorInputForLook)
@@ -192,32 +184,31 @@ namespace StarterAssets
 				LookInput(value.Get<Vector2>());
 			}
 		}
-
 		public void OnJump(InputValue value)
 		{
 			JumpInput(value.isPressed);
 		}
-
+        
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
 		}
-
+        
 		public void OnAim(InputValue value)
 		{
 			AimInput(value.isPressed);
 		}
-
+        
 		public void OnShoot(InputValue value)
 		{
             ShootInput(value.isPressed);
 		}
-
+        
 		public void OnSecondaryFire(InputValue value)
 		{
 			SecondaryFireInput(value.isPressed);
 		}
-
+        
 		public void OnStart(InputValue value)
 		{
 			Debug.Log("OnStart triggered with value: " + value);
