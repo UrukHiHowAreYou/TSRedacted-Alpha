@@ -17,23 +17,8 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
         volume = PlayerPrefs.GetFloat(PLAYER_PREFS_SOUND_EFFECTS_VOLUME, 1f);
     }
-    private void Start()
-    {
-        
-        //Player.Instance.OnPickedSomething += Player_OnPickedSomething;
-    }
-
-    private void Player_OnPickedSomething(object sender, System.EventArgs e)
-    {
-        //Player player = Player.Instance;
-        //PlaySound(audioClipRefsSO.objectPickup, player.transform.position);
-    }
-
-
-
 
     private void PlaySound(AudioClip audioClip, Vector3 position, float volumeMultiplier = 1f)
     {
@@ -43,17 +28,13 @@ public class SoundManager : MonoBehaviour
     }
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
-        Debug.Log("playing sound with volume: " + volume);
+        Debug.Log("playing sound with volume: " + volumeMultiplier * volume);
         PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier * volume);
     }
     public void PlayCountdownSound(int countdownNumber)
     {
         PlaySound(audioClipRefsSO.threeTwoOne[countdownNumber], Vector3.zero);
     }
-    //    public void PlayWarningSound(Vector3 position)
-    //    {
-    //        PlaySound(audioClipRefsSO.warning, position);
-    //    }
 
 
     public void PlayExplosionSound(Vector3 position, float volumeMultiplier = 1f)

@@ -17,7 +17,7 @@ public class GamePausedUI : MonoBehaviour
         });
         mainMenuButton.onClick.AddListener(() => {
             Debug.Log("you clicked the main menuButton");
-            Loader.Load(Loader.Scene.MainMenuScene);
+            Loader.Load(Loader.Scene.MainMenu);
         });
         optionsButton.onClick.AddListener(() => {
             Debug.Log("you clicked the options Button");
