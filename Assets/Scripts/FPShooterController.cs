@@ -85,18 +85,26 @@ public class FPShooterController : MonoBehaviour
             SoundManager.Instance.PlayGunshotSound(transform.position);
             if(hitTransform != null) {
                 // Hit something
+                Debug.Log(hitTransform.gameObject);
+                Debug.Log("EHEHEH = "+hitTransform.gameObject.layer);
+                Debug.Log("hohoho = "+hitTransform.transform.gameObject.layer);
                 if (hitTransform.GetComponent<BulletTarget>() != null) {
                     // Hit target
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitGreen, debugTransform.position, Quaternion.identity);
                     // plays hit marker sfx at player position with volume of 1
                     SoundManager.Instance.PlayHitMarkerSound(transform.position);
-                } else {
+                }
+                else if (hitTransform.gameObject.name == "Structure_Prefab"){
+                    Debug.Log("OOH MAMA DAS A REAL ONE");
                     // Hit something else
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitRed, debugTransform.position, Quaternion.identity);
-                    // plays hit marker sfx at player position with volume of 1 at the wall position
+                    // plays wall-hit marker sfx at player position with volume of 1 at the wall position
                     SoundManager.Instance.PlayHitWallSound(hitTransform.position);
+                } else {
+                    //
+                    Debug.Log("OOh mate you missed ya muffin");
                 }
             }
             
