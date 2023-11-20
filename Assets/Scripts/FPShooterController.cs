@@ -46,7 +46,9 @@ public class FPShooterController : MonoBehaviour
         Transform hitTransform = null;
 
         if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask)) {
-            debugTransform.position = raycastHit.point;
+            if (debugTransform != null) {
+                debugTransform.position = raycastHit.point;
+            }
             mouseWorldPosition = raycastHit.point;
             // ------- Add raycast hitscan code -- this bugs for some reason and raycastHit.point works instead.
             // NB can just use debugTransform.position
