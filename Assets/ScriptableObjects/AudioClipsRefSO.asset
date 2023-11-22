@@ -23,6 +23,8 @@ MonoBehaviour:
   shot:
   - {fileID: 8300000, guid: 28136d8e89857c746b771cc4b538cea1, type: 3}
   - {fileID: 8300000, guid: 28136d8e89857c746b771cc4b538cea1, type: 3}
+  grenadelaunch:
+  - {fileID: 8300000, guid: 85ac8b9379822b649846e878a3b752c1, type: 3}
   hit:
   - {fileID: 8300000, guid: 72574f7f72dada549836307e8c015089, type: 3}
   hitWall:

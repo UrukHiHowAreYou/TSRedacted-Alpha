@@ -9,6 +9,7 @@ public class AudioClipsRefSO : ScriptableObject
     public AudioClip[] threeTwoOne;
     public AudioClip[] explosion;
     public AudioClip[] shot;
+    public AudioClip[] grenadelaunch;
     public AudioClip[] hit;
     public AudioClip[] hitWall;
     //public AudioClip two;

@@ -45,6 +45,10 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioClipRefsSO.shot, position, volumeMultiplier);
     }
+    public void PlayGrenadeLaunchSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.grenadelaunch, position, volumeMultiplier);
+    }
     public void PlayHitMarkerSound(Vector3 position, float volumeMultiplier = 1f)
     {
         PlaySound(audioClipRefsSO.hit, position, volumeMultiplier);

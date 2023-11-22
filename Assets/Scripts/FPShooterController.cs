@@ -23,6 +23,7 @@ public class FPShooterController : MonoBehaviour
     
     // Add in SFX here
     public AudioClip hitmarkerAudioClip;
+    public AudioClip grenadelaunchAudioClip;
     public AudioClip gunshot02AudioClip;
     public AudioClip hitwallAudioClip;
 
@@ -134,6 +135,9 @@ public class FPShooterController : MonoBehaviour
             // this gets the aim direction from the aiming position and spawn point of the bullet 
             Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
             
+            // this plays the grenade launcher sfx from the Sound Manager
+            SoundManager.Instance.PlayGrenadeLaunchSound(transform.position);
+
             // this creates a new bullet prefab
             Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
             
