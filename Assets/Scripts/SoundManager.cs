@@ -37,7 +37,7 @@ public class SoundManager : MonoBehaviour
     }
 
 
-    public void PlayExplosionSound(Vector3 position, float volumeMultiplier = 1f)
+    public void PlayExplosionSound(Vector3 position, float volumeMultiplier = 3f)
     {
         PlaySound(audioClipRefsSO.explosion, position, volumeMultiplier);
     }

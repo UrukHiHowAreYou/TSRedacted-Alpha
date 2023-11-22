@@ -14,7 +14,10 @@ public class FPShooterController : MonoBehaviour
     // [SerializeField] private Transform hitpoint;
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
-
+    [SerializeField] private Transform pfLazerProjectile;
+    [SerializeField] private Transform muzzleFlashPosition;
+    
+    [SerializeField] private Transform vfxMuzzleFlash;
     [SerializeField] private Transform vfxHitGreen;
     [SerializeField] private Transform vfxHitRed;
     
@@ -85,6 +88,9 @@ public class FPShooterController : MonoBehaviour
         if (starterAssetsInputs.shoot) {
             
             SoundManager.Instance.PlayGunshotSound(transform.position);
+            // Instantiate(vfxMuzzleFlash, muzzleFlashPosition.position, Quaternion.identity);
+            Vector3 aimDir_shoot = (mouseWorldPosition - muzzleFlashPosition.position).normalized;
+            Instantiate(pfLazerProjectile, muzzleFlashPosition.position, Quaternion.LookRotation(aimDir_shoot, Vector3.up));
             if(hitTransform != null) {
                 // Hit something
                 Debug.Log(hitTransform.gameObject);
