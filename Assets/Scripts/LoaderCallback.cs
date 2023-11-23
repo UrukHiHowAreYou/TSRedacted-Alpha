@@ -6,13 +6,31 @@ public class LoaderCallback : MonoBehaviour
 {
     private bool isFirstUpdate = true;
 
-    private void Update()
-    {
-        if (isFirstUpdate)
-        {
-            isFirstUpdate = false;
+    // public float delay = 2;
+    // float timer;
 
-            Loader.LoaderCallback();
-        }
+    private void Update()
+    {   
+
+        // timer += Time.deltaTime;
+        // if (timer > delay)
+        //     {
+
+                if (isFirstUpdate)
+                {
+                    isFirstUpdate = false;
+
+                    
+                        
+                        Loader.LoaderCallback();
+
+
+                        // timer = 5;
+
+
+                }
+        
+            // }
+
     }
 }
