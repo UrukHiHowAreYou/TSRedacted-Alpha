@@ -7,19 +7,29 @@ using StarterAssets;
 public class FPShooterController : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
+    [Tooltip("Look sensitivity multipliers")]
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
     // [SerializeField] private Transform hitpoint;
+
+    [Tooltip("Prefab and spawn point for Grenade bullet")]
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private Transform spawnBulletPosition;
+    [Tooltip("Prefab and spawn point for Lazer bullet")]
     [SerializeField] private Transform pfLazerProjectile;
     [SerializeField] private Transform muzzleFlashPosition;
     
+    [Tooltip("VFX for gunshot and hitting objects")]
     [SerializeField] private Transform vfxMuzzleFlash;
     [SerializeField] private Transform vfxHitGreen;
     [SerializeField] private Transform vfxHitRed;
+
+    [Tooltip("Bullet Hole setup")]
+    [SerializeField] GameObject bulletHolePrefab;
+    [SerializeField] GameObject bulletHoleContainer;
+    [SerializeField] float bulletHoleDestroyDelay = 5f;
     
     // Add in SFX here
     public AudioClip hitmarkerAudioClip;
@@ -58,6 +68,8 @@ public class FPShooterController : MonoBehaviour
             // NB can just use debugTransform.position
             hitTransform = raycastHit.transform;
             // hitpoint.position = raycastHit.point
+
+            
         }
 
         // --- Hi Ryan, this updates the character rotation to match the aim direction --- 
@@ -115,6 +127,17 @@ public class FPShooterController : MonoBehaviour
                     //
                     Debug.Log("OOh mate you missed ya muffin");
                 }
+                // Hi Ryan, this is the code for spawning a bullethole
+                GameObject spawnedObject_bulletHole = Instantiate(bulletHolePrefab, raycastHit.point, Quaternion.identity);
+                Quaternion targetRotation_bulletHole = Quaternion.LookRotation(ray.direction);
+
+                // rotate the bullethole to match raycast hit point on wall
+                spawnedObject_bulletHole.transform.rotation = targetRotation_bulletHole;
+                spawnedObject_bulletHole.transform.SetParent(bulletHoleContainer.transform);
+                // randomly rotate the bullethole around z axis (purely visual)
+                spawnedObject_bulletHole.transform.Rotate(Vector3.forward, Random.Range(0f, 360f));
+                // destroy bullethole after designated time (default 5 seconds)
+                Destroy(spawnedObject_bulletHole, bulletHoleDestroyDelay);
             }
             
             
