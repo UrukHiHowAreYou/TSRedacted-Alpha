@@ -336,9 +336,9 @@ namespace StarterAssets
 
 
 
-                _animator.SetFloat(_animIDSpeed, horizontalSpeed);
-                _animator.SetFloat(_animIDDirection, (adjustedAngle/50));
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+                _animator.SetFloat(_animIDSpeed, horizontalSpeed, 0.1f, Time.deltaTime);
+                _animator.SetFloat(_animIDDirection, (adjustedAngle/50), 0.25f, Time.deltaTime);
+                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude, 0.1f, Time.deltaTime);
             }
         }
 
