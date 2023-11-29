@@ -35,7 +35,7 @@ namespace StarterAssets
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
-        [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
+        [Range(0, 1)] public float FootstepAudioVolume = 0.7f;
 
         [Space(10)]
         [Tooltip("The height the player can jump")]
@@ -335,11 +335,14 @@ namespace StarterAssets
                 float adjustedAngle = movementAngle * angleSign;
 
 
-
                 _animator.SetFloat(_animIDSpeed, horizontalSpeed, 0.1f, Time.deltaTime);
                 _animator.SetFloat(_animIDDirection, (adjustedAngle/50), 0.25f, Time.deltaTime);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude, 0.1f, Time.deltaTime);
+
             }
+
+        
+            
         }
 
         private void JumpAndGravity()
