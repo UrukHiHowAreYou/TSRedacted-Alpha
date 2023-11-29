@@ -17,6 +17,7 @@ namespace StarterAssets
 		{
 			Shoot,
 			SecondaryFire,
+            Flashlight,
 			Aim,
 			Jump,
 			Forward,
@@ -35,6 +36,7 @@ namespace StarterAssets
 		public bool aim;
 		public bool shoot;
 		public bool secondaryFire;
+        public bool flashlight;
 		public bool start;
 
 		[Header("Movement Settings")]
@@ -69,6 +71,10 @@ namespace StarterAssets
                     break;
                 case PlayerActions.SecondaryFire:
                     actionToRebind = "SecondaryFire";
+                    bindingIndex = 0;
+                    break;
+                case PlayerActions.Flashlight:
+                    actionToRebind = "Flashlight";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.Aim:
@@ -123,6 +129,10 @@ namespace StarterAssets
                     break;
                 case PlayerActions.SecondaryFire:
                     actionToRebind = "SecondaryFire";
+                    bindingIndex = 0;
+                    break;
+                case PlayerActions.Flashlight:
+                    actionToRebind = "Flashlight";
                     bindingIndex = 0;
                     break;
                 case PlayerActions.Aim:
@@ -209,6 +219,11 @@ namespace StarterAssets
 			SecondaryFireInput(value.isPressed);
 		}
         
+        public void OnFlashlight(InputValue value)
+		{
+			FlashlightInput(value.isPressed);
+		}
+
 		public void OnStart(InputValue value)
 		{
 			Debug.Log("OnStart triggered with value: " + value);
@@ -250,6 +265,11 @@ namespace StarterAssets
 		public void SecondaryFireInput(bool newSecondaryFireState)
 		{
 			secondaryFire = newSecondaryFireState;
+		}
+
+        public void FlashlightInput(bool newFlashlightState)
+		{
+			flashlight = newFlashlightState;
 		}
 
 		public void StartInput(bool newStartState)

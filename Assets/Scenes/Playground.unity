@@ -2003,7 +2003,7 @@ GameObject:
   - component: {fileID: 374347618}
   - component: {fileID: 374347617}
   m_Layer: 0
-  m_Name: Spot Light
+  m_Name: FlashLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2172,7 +2172,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 374347615}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 11
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -12990,6 +12990,7 @@ MonoBehaviour:
   aim: 0
   shoot: 0
   secondaryFire: 0
+  flashlight: 0
   start: 0
   analogMovement: 0
   cursorLocked: 1
@@ -14246,6 +14247,7 @@ MonoBehaviour:
   aim: 0
   shoot: 0
   secondaryFire: 0
+  flashlight: 0
   start: 0
   analogMovement: 0
   cursorLocked: 1
@@ -23683,6 +23685,7 @@ MonoBehaviour:
     type: 3}
   bulletHoleContainer: {fileID: 1553061381}
   bulletHoleDestroyDelay: 3
+  flashlight: {fileID: 374347618}
   hitmarkerAudioClip: {fileID: 8300000, guid: 72574f7f72dada549836307e8c015089, type: 3}
   grenadelaunchAudioClip: {fileID: 0}
   gunshot02AudioClip: {fileID: 8300000, guid: 28136d8e89857c746b771cc4b538cea1, type: 3}

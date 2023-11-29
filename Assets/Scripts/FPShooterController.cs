@@ -30,6 +30,9 @@ public class FPShooterController : MonoBehaviour
     [SerializeField] GameObject bulletHolePrefab;
     [SerializeField] GameObject bulletHoleContainer;
     [SerializeField] float bulletHoleDestroyDelay = 5f;
+
+
+    [SerializeField] private Light flashlight;
     
     // Add in SFX here
     public AudioClip hitmarkerAudioClip;
@@ -168,6 +171,15 @@ public class FPShooterController : MonoBehaviour
             // ------ if this isn't set to false, the projectiles will constantly collide with themselves in front of the player
             // ------ a delay would need to be added for this to fire continuously
             starterAssetsInputs.secondaryFire = false;
+        }
+
+        if (starterAssetsInputs.flashlight) {
+
+            Debug.Log("flashy flashy now now");
+            // toggle flashlight 
+            flashlight.enabled = !flashlight.enabled;
+            // stop flashlight input
+            starterAssetsInputs.flashlight = false;
         }
 
     }
