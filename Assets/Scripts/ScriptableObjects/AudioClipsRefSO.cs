@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.AssetImporters;
 using UnityEngine;
 
 [CreateAssetMenu()]
@@ -12,6 +9,8 @@ public class AudioClipsRefSO : ScriptableObject
     public AudioClip[] grenadelaunch;
     public AudioClip[] hit;
     public AudioClip[] hitWall;
+    public AudioClip[] step;
+    public AudioClip[] land;
     //public AudioClip two;
     //public AudioClip one;
 

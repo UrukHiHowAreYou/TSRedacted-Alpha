@@ -30,3 +30,7 @@ MonoBehaviour:
   hitWall:
   - {fileID: 8300000, guid: 2e0a7912142fd984ca39aa4a8b119ea1, type: 3}
   - {fileID: 8300000, guid: a75af873ce083b346a7aa6ffa61e6793, type: 3}
+  step:
+  - {fileID: 8300000, guid: b7d29c40e88d85d4ca529dc6570587e0, type: 3}
+  land:
+  - {fileID: 8300000, guid: 6c9818b84dbebba47be2dba6d9afe2c3, type: 3}

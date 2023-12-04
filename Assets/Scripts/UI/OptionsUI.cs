@@ -73,11 +73,11 @@ public class OptionsUI : MonoBehaviour
         //moveLeftButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Left); });
         //moveRightButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Move_Right); });
         //interactButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Interact); });
-        shootButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Shoot); });
-        secondaryFireButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.SecondaryFire); });
-        aimButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Aim); });
-        sprintButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Sprint); });
-        jumpButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Jump); });
+            //Real\\shootButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Shoot); });
+            //Real\\secondaryFireButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.SecondaryFire); });
+            //Real\\aimButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Aim); });
+            //Real\\sprintButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Sprint); });
+            //Real\\jumpButton.onClick.AddListener(() => { RebindBinding(StarterAssetsInputs.PlayerActions.Jump); });
         //pauseButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Pause); });
         //gamepadInteractButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_Interact); });
         //gamepadInteractAlternateButton.onClick.AddListener(() => { RebindBinding(PlayerInput.Binding.Gamepad_InteractAlternate); });
@@ -111,11 +111,11 @@ public class OptionsUI : MonoBehaviour
         //interactAlternateText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.InteractAlternate);
         //pauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Pause);
         //gamepadInteractText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Interact);
-        shootText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Shoot);
-        secondaryFireText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.SecondaryFire);
-        aimText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Aim);
-        sprintText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Sprint);
-        jumpText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Jump);
+            //Real\\shootText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Shoot);
+            //Real\\secondaryFireText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.SecondaryFire);
+            //Real\\aimText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Aim);
+            //Real\\sprintText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Sprint);
+            //Real\\jumpText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Jump);
         //gamepadPauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Pause);
     }
 
@@ -146,10 +146,10 @@ public class OptionsUI : MonoBehaviour
         //soundEffectsText.text =
         //ShowPressToRebindKeyTransform();
         Debug.Log("REBIND BINDING");
-        StarterAssetsInputs.Instance.RebindBinding(playerAction, () => {
-            //HidePressToRebindKeyTransform();
-            UpdateVisual();
-        }
-        );
+            //Real\\StarterAssetsInputs.Instance.RebindBinding(playerAction, () => {
+            //Real\\    //HidePressToRebindKeyTransform();
+            //Real\\    UpdateVisual();
+            //Real\\}
+            //Real\\);
     }
 }

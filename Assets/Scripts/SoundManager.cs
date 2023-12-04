@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
@@ -57,6 +54,15 @@ public class SoundManager : MonoBehaviour
     {
         PlaySound(audioClipRefsSO.hitWall, position, volumeMultiplier);
     }
+    public void PlayStepSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.step, position, volumeMultiplier);
+    }
+    public void PlayLandingSound(Vector3 position, float volumeMultiplier = 1f)
+    {
+        PlaySound(audioClipRefsSO.land, position, volumeMultiplier);
+    }
+ 
 
     public void ChangeVolume()
     {

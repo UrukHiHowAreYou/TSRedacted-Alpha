@@ -186,7 +186,9 @@ namespace StarterAssets
         public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
-		}
+            Debug.Log("Moving") ;
+
+        }
 		public void OnLook(InputValue value)
 		{
 			if(cursorInputForLook)
@@ -197,6 +199,7 @@ namespace StarterAssets
 		public void OnJump(InputValue value)
 		{
 			JumpInput(value.isPressed);
+            Debug.Log("Jump");
 		}
         
 		public void OnSprint(InputValue value)
@@ -235,6 +238,7 @@ namespace StarterAssets
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
+            Debug.Log("moveDirection: " + newMoveDirection);
 		} 
 
 		public void LookInput(Vector2 newLookDirection)
@@ -245,9 +249,10 @@ namespace StarterAssets
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
-		}
+            Debug.Log("jumpState: " + newJumpState);
+        }
 
-		public void SprintInput(bool newSprintState)
+        public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
 		}

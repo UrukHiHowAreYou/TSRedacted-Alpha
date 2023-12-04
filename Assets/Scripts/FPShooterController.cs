@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
+using System.Globalization;
+using Unity.Netcode;
+using System.Runtime.CompilerServices;
 
-public class FPShooterController : MonoBehaviour
+public class FPShooterController : NetworkBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [Tooltip("Look sensitivity multipliers")]
@@ -43,22 +46,43 @@ public class FPShooterController : MonoBehaviour
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
     private Animator animator;
+    private GameObject _mainCamera;
 
 
     private void Awake() {
+        //starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        //thirdPersonController = GetComponent<ThirdPersonController>();
+        //animator = GetComponent<Animator>();
+    }
+
+    //Needs to be OnNetwrkSpawn Later
+    private void Start()
+    {
+        if (!IsOwner)
+        {
+            Debug.Log("FPS; I am NOT the owner: " + this.name);
+            return;
+        }
+        
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
         animator = GetComponent<Animator>();
+
+        Debug.Log("FPS; I am the owner: " + this.name);
+        _mainCamera = this.gameObject.transform.Find("MainCamera").gameObject;
     }
 
     private void Update() {
+        if (!IsOwner)
+        {
+            return;
+        }
 
-        
         // --- Hi Ryan, this casts a ray at the centre of the screen and adds a debug sphere to check ---
         // --- it also updates the mouse position with the target ---
         Vector3 mouseWorldPosition = Vector3.zero;
         Vector2 screenCentrePoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        Ray ray = Camera.main.ScreenPointToRay(screenCentrePoint);
+        Ray ray = _mainCamera.GetComponent<Camera>().ScreenPointToRay(screenCentrePoint);
         // ------- Add raycast hitscan code
         Transform hitTransform = null;
 
@@ -70,37 +94,32 @@ public class FPShooterController : MonoBehaviour
             // ------- Add raycast hitscan code -- this bugs for some reason and raycastHit.point works instead.
             // NB can just use debugTransform.position
             hitTransform = raycastHit.transform;
-            // hitpoint.position = raycastHit.point
-
-            
+            // hitpoint.position = raycastHit.point    
         }
 
-        // --- Hi Ryan, this updates the character rotation to match the aim direction --- 
-        Vector3 worldAimTarget = mouseWorldPosition;
-        worldAimTarget.y = transform.position.y;
-        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-        // --- this ensures a smooth transition of the rotation --- 
-        transform.forward =  Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
 
-        // --- Hi Ryan, this tests if Aim is pressed ---
+        rotatePlayerServerRpc(mouseWorldPosition);
+
+        // --- Hi Adam, this tests if Aim is pressed ---
         if (starterAssetsInputs.aim) {
             // --- this lowers the sensitivity when aiming ---
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
 
-            // Hi Ryan, this would activate aiming animation on aim, if it wasn't set to on by default
+            // Hi Adam, this would activate aiming animation on aim, if it wasn't set to on by default
             // animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
             
         } else {
-            // --- Hi Ryan, this sets the sensitivity to normal if not aiming ---
+            // --- Hi Will, this sets the sensitivity to normal if not aiming ---
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
 
-            // Hi Ryan, this would deactivate aiming animation, if it wasn't set to on by default
+            // Hi Mr Jenson, this would deactivate aiming animation, if it wasn't set to on by default
             // animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
         }
 
         // Hi Ryan, this conditional detects whether shoot has been fired
+        //make into another function to be sent as an RPC
         if (starterAssetsInputs.shoot) {
             
             SoundManager.Instance.PlayGunshotSound(transform.position);
@@ -184,5 +203,14 @@ public class FPShooterController : MonoBehaviour
 
     }
 
-
+    [ServerRpc]
+    private void rotatePlayerServerRpc(Vector3 mouseWorldPosition)
+    {
+        // --- Hi Ryan, this updates the character rotation to match the aim direction --- 
+        Vector3 worldAimTarget = mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+        // --- this ensures a smooth transition of the rotation --- 
+        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 20f);
+    }
 }
