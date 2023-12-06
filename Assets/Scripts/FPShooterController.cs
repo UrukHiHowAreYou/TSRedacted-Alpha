@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using Cinemachine;
 using StarterAssets;
 
-public class FPShooterController : MonoBehaviour
+public class FPShooterController : NetworkBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [Tooltip("Look sensitivity multipliers")]
@@ -42,18 +43,16 @@ public class FPShooterController : MonoBehaviour
 
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
-    private Animator animator;
 
 
     private void Awake() {
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         thirdPersonController = GetComponent<ThirdPersonController>();
-        animator = GetComponent<Animator>();
     }
 
     private void Update() {
 
-        
+        // if (!HasAuthority) { return; };
         // --- Hi Ryan, this casts a ray at the centre of the screen and adds a debug sphere to check ---
         // --- it also updates the mouse position with the target ---
         Vector3 mouseWorldPosition = Vector3.zero;
@@ -87,17 +86,11 @@ public class FPShooterController : MonoBehaviour
             // --- this lowers the sensitivity when aiming ---
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
-
-            // Hi Ryan, this would activate aiming animation on aim, if it wasn't set to on by default
-            // animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 1f, Time.deltaTime * 10f));
             
         } else {
             // --- Hi Ryan, this sets the sensitivity to normal if not aiming ---
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
-
-            // Hi Ryan, this would deactivate aiming animation, if it wasn't set to on by default
-            // animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(1), 0f, Time.deltaTime * 10f));
         }
 
         // Hi Ryan, this conditional detects whether shoot has been fired
@@ -109,9 +102,9 @@ public class FPShooterController : MonoBehaviour
             Instantiate(pfLazerProjectile, muzzleFlashPosition.position, Quaternion.LookRotation(aimDir_shoot, Vector3.up));
             if(hitTransform != null) {
                 // Hit something
-                Debug.Log(hitTransform.gameObject);
-                Debug.Log("EHEHEH = "+hitTransform.gameObject.layer);
-                Debug.Log("hohoho = "+hitTransform.transform.gameObject.layer);
+                // Debug.Log(hitTransform.gameObject);
+                // Debug.Log("EHEHEH = "+hitTransform.gameObject.layer);
+                // Debug.Log("hohoho = "+hitTransform.transform.gameObject.layer);
                 if (hitTransform.GetComponent<BulletTarget>() != null) {
                     // Hit target
                     // using debugTransform.position instead of transform.position
@@ -120,15 +113,14 @@ public class FPShooterController : MonoBehaviour
                     SoundManager.Instance.PlayHitMarkerSound(transform.position);
                 }
                 else if (hitTransform.gameObject.name == "Structure_Prefab"){
-                    Debug.Log("OOH MAMA DAS A REAL ONE");
+                    // Debug.Log("OOH MAMA DAS A REAL ONE");
                     // Hit something else
                     // using debugTransform.position instead of transform.position
                     Instantiate(vfxHitRed, debugTransform.position, Quaternion.identity);
                     // plays wall-hit marker sfx at player position with volume of 1 at the wall position
                     SoundManager.Instance.PlayHitWallSound(hitTransform.position);
                 } else {
-                    //
-                    Debug.Log("OOh mate you missed ya muffin");
+                    // Debug.Log("OOh mate you missed ya muffin");
                 }
                 // Hi Ryan, this is the code for spawning a bullethole
                 GameObject spawnedObject_bulletHole = Instantiate(bulletHolePrefab, raycastHit.point, Quaternion.identity);
@@ -146,6 +138,7 @@ public class FPShooterController : MonoBehaviour
             
             // this stops firing after 1 shot
             starterAssetsInputs.shoot = false;
+            Debug.Log("Stopped shooting, so shooting = "+starterAssetsInputs.shoot);
         }
 
         // Hi ADAM, this conditional detects whether pause has been pressed

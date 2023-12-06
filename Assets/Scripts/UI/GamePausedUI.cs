@@ -33,6 +33,7 @@ public class GamePausedUI : MonoBehaviour
         GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnPaused;
 
         Hide();
+        Debug.Log("pause menu been hidden yo!");
     }
 
 

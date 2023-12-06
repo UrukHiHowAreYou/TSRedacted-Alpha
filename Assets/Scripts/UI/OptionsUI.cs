@@ -89,6 +89,7 @@ public class OptionsUI : MonoBehaviour
         GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnpaused;
         UpdateVisual();
         Hide();
+        Debug.Log("yo hide me bitch!");
         //HidePressToRebindKeyTransform();
     }
 

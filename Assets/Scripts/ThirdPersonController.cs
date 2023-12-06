@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Unity.Netcode;
+using UnityEngine;
+using UnityEngine.Networking;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -12,8 +14,14 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : NetworkBehaviour
     {
+
+        [Header("Camera and Audio Listener")]
+        [Tooltip("Add camera and audiolistener to be switched on upon start and used for other nefarious means")]
+        [SerializeField] private Camera _mainCamera;
+        [SerializeField] private AudioListener _audioListener;
+        
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         [SerializeField] private float MoveSpeedBase = 4.0f;
@@ -110,7 +118,7 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        // private GameObject _mainCamera;
         [SerializeField] private bool _rotateOnMove = false;
 
         private const float _threshold = 0.01f;
@@ -133,9 +141,16 @@ namespace StarterAssets
         private void Awake()
         {
             // get a reference to our main camera
-            if (_mainCamera == null)
-            {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            
+            // Debug.Log("OwnerClientID ="+OwnerClientID);
+            Debug.Log("Am I the owner? " + IsOwner);
+            Debug.Log("Am I the local player? " + IsLocalPlayer);
+            Debug.Log("Do I have authority? " +hasAuthority);
+
+
+            if (hasAuthority) {
+                _mainCamera.enabled = true;
+                _audioListener.enabled = true;
             }
         }
 
@@ -173,19 +188,21 @@ namespace StarterAssets
             if (GameManager.Instance.IsGamePlaying())
             {
                 SetMoveSpeed(1f);
-                Debug.Log("GamePlaying MoveSpeed: " + MoveSpeed);
+                // Debug.Log("GamePlaying MoveSpeed: " + MoveSpeed);
         
             }
             else
             {
                 SetMoveSpeed(0f);
-                Debug.Log("GameStopped MoveSpeed: " + MoveSpeed);
+                // Debug.Log("GameStopped MoveSpeed: " + MoveSpeed);
             }
         
         }
 
         private void Update()
-        {
+        {   
+            if (!IsOwner) return;
+
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
@@ -194,7 +211,8 @@ namespace StarterAssets
         }
 
         private void LateUpdate()
-        {
+        {   
+            if (!IsOwner) return;
             CameraRotation();
         }
 
