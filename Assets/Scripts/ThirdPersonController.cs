@@ -1,4 +1,5 @@
-﻿using Unity.Netcode;
+﻿using Cinemachine;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.Networking;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -21,6 +22,8 @@ namespace StarterAssets
         [Tooltip("Add camera and audiolistener to be switched on upon start and used for other nefarious means")]
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private AudioListener _audioListener;
+        [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+        [SerializeField] private PlayerInput _playerInput;
         
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -113,7 +116,7 @@ namespace StarterAssets
         private int _animIDMotionSpeed;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
-        private PlayerInput _playerInput;
+        // private PlayerInput _playerInput;
 #endif
         private Animator _animator;
         private CharacterController _controller;
@@ -143,19 +146,26 @@ namespace StarterAssets
             // get a reference to our main camera
             
             // Debug.Log("OwnerClientID ="+OwnerClientID);
-            Debug.Log("Am I the owner? " + IsOwner);
-            Debug.Log("Am I the local player? " + IsLocalPlayer);
-            Debug.Log("Do I have authority? " +hasAuthority);
-
-
-            if (hasAuthority) {
-                _mainCamera.enabled = true;
-                _audioListener.enabled = true;
-            }
+            
         }
 
         private void Start()
-        {
+        {   
+            Debug.Log("Am I the owner? " + IsOwner);
+            Debug.Log("Am I the local player? " + IsLocalPlayer);
+            Debug.Log("Am I a product of the system? Aka OwnedByServer? " + IsOwnedByServer);
+            Debug.Log("What's ya ClientID and number? " +OwnerClientId);
+
+
+            if (IsOwner) {
+                _mainCamera.enabled = true;
+                _audioListener.enabled = true;
+                _cinemachineVirtualCamera.enabled = true;
+                // _input.enabled = true;
+                _playerInput.enabled = true;
+                Debug.Log("Mother it is done. I am the owner now.");
+            }
+
             //subscribe to the onGame(Un)Paused Event
             GameManager.Instance.OnGamePaused += GameManager_OnGamePaused;
             GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnPaused;
@@ -201,19 +211,27 @@ namespace StarterAssets
 
         private void Update()
         {   
-            if (!IsOwner) return;
-
+            if (!IsOwner) { 
+                Debug.Log("ThirdPersonController_"+OwnerClientId+": Ve are not ze owner. Please stand down.");
+                return; 
+            }
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
             GroundedCheck();
             Move();
+            
+            
+            Debug.Log("ThirdPersonController_"+OwnerClientId+": YAHA! Ve have taken control! It iz time for initiate attack!");
         }
 
         private void LateUpdate()
         {   
             if (!IsOwner) return;
+
             CameraRotation();
+            
+            Debug.Log("ThirdPersonController_"+OwnerClientId+": OH HO! Ve still have control! Zey are not eggz-peck-ting zis!?!");
         }
 
         private void AssignAnimationIDs()

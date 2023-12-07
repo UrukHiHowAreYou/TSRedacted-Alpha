@@ -10,6 +10,9 @@ namespace StarterAssets
 	public class StarterAssetsInputs : MonoBehaviour
     {
 
+        
+
+
         public static StarterAssetsInputs Instance { get; private set; }
         private const string PLAYER_PREFS_BINDINGS = "InputBindings";
 

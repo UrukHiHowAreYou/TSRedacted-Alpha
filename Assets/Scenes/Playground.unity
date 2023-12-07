@@ -11536,7 +11536,7 @@ Transform:
   m_GameObject: {fileID: 2041947939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 16.15, y: 1.24, z: 11.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11827,13 +11827,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051031562}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.64, y: 1.68, z: 10.06}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0.6399994, y: 1.6800001, z: -0.47999954}
   m_LocalScale: {x: 1, y: 1.9058, z: 0.12275999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2041947940}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!4 &2068393386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8718778828885884488, guid: e5f4daf24146ee040b5a2d7a73b30aa0,
@@ -12846,6 +12846,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 0}
   _audioListener: {fileID: 0}
+  _cinemachineVirtualCamera: {fileID: 0}
+  _playerInput: {fileID: 0}
   MoveSpeedBase: 4
   SprintSpeedBase: 7
   RotationSmoothTime: 0.12

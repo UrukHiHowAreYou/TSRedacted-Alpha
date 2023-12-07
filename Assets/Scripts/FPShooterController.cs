@@ -52,7 +52,12 @@ public class FPShooterController : NetworkBehaviour
 
     private void Update() {
 
-        // if (!HasAuthority) { return; };
+        if (!IsOwner) { 
+            // Debug.Log("FPShooterController_"+OwnerClientId+": Ve are not ze owner. Please stand down.");
+            return; 
+        };
+        // Debug.Log("FPShooterController_"+OwnerClientId+": YAHA! Ve have taken control! It iz time for initiate attack!");
+
         // --- Hi Ryan, this casts a ray at the centre of the screen and adds a debug sphere to check ---
         // --- it also updates the mouse position with the target ---
         Vector3 mouseWorldPosition = Vector3.zero;

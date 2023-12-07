@@ -6948,7 +6948,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6816541819660991958}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -8032,6 +8032,7 @@ GameObject:
   - component: {fileID: 487724787337242448}
   - component: {fileID: 1719134299315573953}
   - component: {fileID: 2655310583679128602}
+  - component: {fileID: -3054728596312219624}
   m_Layer: 8
   m_Name: A-Player
   m_TagString: Player
@@ -8120,7 +8121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 1024472599
+  GlobalObjectIdHash: 3403538767
   AlwaysReplicateAsRoot: 0
   SynchronizeTransform: 1
   ActiveSceneSynchronization: 0
@@ -8142,6 +8143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 4952782096178353724}
   _audioListener: {fileID: 4952782096178353725}
+  _cinemachineVirtualCamera: {fileID: 6816541819660991528}
+  _playerInput: {fileID: 7456358246254420116}
   MoveSpeedBase: 4
   SprintSpeedBase: 7
   RotationSmoothTime: 0.12
@@ -8166,7 +8169,7 @@ MonoBehaviour:
     m_Bits: 513
   CinemachineCameraTarget: {fileID: 5566281950055738641}
   TopClamp: 90
-  BottomClamp: -35
+  BottomClamp: -60
   CameraAngleOverride: 0
   LockCameraPosition: 0
   _rotateOnMove: 0
@@ -8257,7 +8260,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8105829635435520448}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
@@ -8501,6 +8504,20 @@ MonoBehaviour:
   InLocalSpace: 0
   Interpolate: 1
   SlerpPosition: 0
+--- !u!114 &-3054728596312219624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8105829635435520448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad8deae8091111f4eb30a56c1f4e0d3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionStateInfoList: []
+  m_Animator: {fileID: 8927944975283218938}
 --- !u!1 &8137223407991171780
 GameObject:
   m_ObjectHideFlags: 0
