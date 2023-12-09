@@ -1529,6 +1529,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200802476}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &244784653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 244784656}
+  - component: {fileID: 244784654}
+  - component: {fileID: 244784655}
+  m_Layer: 0
+  m_Name: PlayerManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &244784654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244784653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1947663527
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &244784655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244784653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0da792feefbe69449938a0573241c9b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &244784656
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 244784653}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.9538002, y: 401.18387, z: -0.9262191}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &252449137
 GameObject:
   m_ObjectHideFlags: 0
@@ -7210,7 +7275,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 127.0.0.1
+    Address: 192.168.1.215
     Port: 7777
     ServerListenAddress: 127.0.0.1
   DebugSimulator:
@@ -14822,6 +14887,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: pfBulletProjectile
       objectReference: {fileID: 0}
+    - target: {fileID: 6850709921300325694, guid: 6728cdda6be01fd4588db8c344e9d404,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 265290306
+      objectReference: {fileID: 0}
+    - target: {fileID: 8590723881545408536, guid: 6728cdda6be01fd4588db8c344e9d404,
+        type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 1379382999
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6711422574870020859, guid: 6728cdda6be01fd4588db8c344e9d404, type: 3}
     m_RemovedGameObjects: []
@@ -19108,6 +19183,7 @@ SceneRoots:
   - {fileID: 788247646}
   - {fileID: 396731186}
   - {fileID: 1132015833}
+  - {fileID: 244784656}
   - {fileID: 1527799849}
   - {fileID: 2114283753834967213}
   - {fileID: 5233691267181580725}

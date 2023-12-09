@@ -163,8 +163,8 @@ public class FPShooterController : NetworkBehaviour
             SoundManager.Instance.PlayGrenadeLaunchSound(transform.position);
 
             // this creates a new bullet prefab
-            Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
-            
+            Transform spawnedGrenadeTransform = Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+            spawnedGrenadeTransform.GetComponent<NetworkObject>().Spawn(true);
             // this stops firing after 1 shot
             // ------ if this isn't set to false, the projectiles will constantly collide with themselves in front of the player
             // ------ a delay would need to be added for this to fire continuously

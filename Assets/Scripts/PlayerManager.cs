@@ -19,7 +19,7 @@ public class PlayersManager : NetworkSingleton<PlayersManager>
         {
             if(IsServer)
             {
-                Logger.Instance.LogInfo($"{id} just connected...");
+                Logger.Instance.LogInfo($"Player_{id} just connected...");
                 playersInGame.Value++;
             }
         };
@@ -28,7 +28,7 @@ public class PlayersManager : NetworkSingleton<PlayersManager>
         {
             if(IsServer)
             {
-                Logger.Instance.LogInfo($"{id} just disconnected...");
+                Logger.Instance.LogInfo($"Player_{id} just disconnected...");
                 playersInGame.Value--;
             }
         };
