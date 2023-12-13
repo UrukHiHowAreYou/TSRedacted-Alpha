@@ -151,10 +151,10 @@ namespace StarterAssets
 
         private void Start()
         {   
-            Debug.Log("Am I the owner? " + IsOwner);
-            Debug.Log("Am I the local player? " + IsLocalPlayer);
-            Debug.Log("Am I a product of the system? Aka OwnedByServer? " + IsOwnedByServer);
-            Debug.Log("What's ya ClientID and number? " +OwnerClientId);
+            // Debug.Log("Am I the owner? " + IsOwner);
+            // Debug.Log("Am I the local player? " + IsLocalPlayer);
+            // Debug.Log("Am I a product of the system? Aka OwnedByServer? " + IsOwnedByServer);
+            // Debug.Log("What's ya ClientID and number? " +OwnerClientId);
 
 
             if (IsOwner) {
@@ -212,7 +212,7 @@ namespace StarterAssets
         private void Update()
         {   
             if (!IsOwner) { 
-                Debug.Log("ThirdPersonController_"+OwnerClientId+": Ve are not ze owner. Please stand down.");
+                // Debug.Log("ThirdPersonController_"+OwnerClientId+": Ve are not ze owner. Please stand down.");
                 return; 
             }
             _hasAnimator = TryGetComponent(out _animator);
@@ -222,7 +222,7 @@ namespace StarterAssets
             Move();
             
             
-            Debug.Log("ThirdPersonController_"+OwnerClientId+": YAHA! Ve have taken control! It iz time for initiate attack!");
+            // Debug.Log("ThirdPersonController_"+OwnerClientId+": YAHA! Ve have taken control! It iz time for initiate attack!");
         }
 
         private void LateUpdate()
@@ -231,7 +231,7 @@ namespace StarterAssets
 
             CameraRotation();
             
-            Debug.Log("ThirdPersonController_"+OwnerClientId+": OH HO! Ve still have control! Zey are not eggz-peck-ting zis!?!");
+            // Debug.Log("ThirdPersonController_"+OwnerClientId+": OH HO! Ve still have control! Zey are not eggz-peck-ting zis!?!");
         }
 
         private void AssignAnimationIDs()

@@ -12,15 +12,15 @@ public class GamePausedUI : MonoBehaviour
     private void Awake()
     {
         resumeButton.onClick.AddListener(() => {
-            Debug.Log("you clicked the resume Button");
+            // Debug.Log("you clicked the resume Button");
             GameManager.Instance.TogglePauseGame();
         });
         mainMenuButton.onClick.AddListener(() => {
-            Debug.Log("you clicked the main menuButton");
+            // Debug.Log("you clicked the main menuButton");
             Loader.Load(Loader.Scene.MainMenu);
         });
         optionsButton.onClick.AddListener(() => {
-            Debug.Log("you clicked the options Button");
+            // Debug.Log("you clicked the options Button");
             Hide();
             OptionsUI.Instance.Show(Show);
         });
@@ -33,7 +33,7 @@ public class GamePausedUI : MonoBehaviour
         GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnPaused;
 
         Hide();
-        Debug.Log("pause menu been hidden yo!");
+        // Debug.Log("pause menu been hidden yo!");
     }
 
 

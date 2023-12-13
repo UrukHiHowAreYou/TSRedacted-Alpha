@@ -50,8 +50,8 @@ public class CameraSwitcher : MonoBehaviour
             firstLoop = true;
         }
 
-        Debug.Log("Index = "+index);
-        Debug.Log("Previous Indices = "+previousIndices[0]+", "+previousIndices[1]);
+        // Debug.Log("Index = "+index);
+        // Debug.Log("Previous Indices = "+previousIndices[0]+", "+previousIndices[1]);
     }
 
 

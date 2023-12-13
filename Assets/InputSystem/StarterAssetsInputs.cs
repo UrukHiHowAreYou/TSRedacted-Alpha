@@ -229,7 +229,7 @@ namespace StarterAssets
 
 		public void OnStart(InputValue value)
 		{
-			Debug.Log("OnStart triggered with value: " + value);
+			// Debug.Log("OnStart triggered with value: " + value);
 			StartInput(value.isPressed);
 		}
 #endif
@@ -277,7 +277,7 @@ namespace StarterAssets
 
 		public void StartInput(bool newStartState)
 		{
-			Debug.Log("StartInput triggered with value: " + newStartState);
+			// Debug.Log("StartInput triggered with value: " + newStartState);
 			start = newStartState;
 		}
 

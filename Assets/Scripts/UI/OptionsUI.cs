@@ -87,9 +87,13 @@ public class OptionsUI : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.OnGameUnPaused += GameManager_OnGameUnpaused;
-        UpdateVisual();
+        // Debug.Log("------------- yo ongameunpaused ongameunpaused bitch! -------------");
         Hide();
-        Debug.Log("yo hide me bitch!");
+        // Debug.Log("------------- yo hide me bitch! -------------");
+        UpdateVisual();
+        // WARNING: THE BELOW ISN'T SHOWING
+        // Debug.Log("------------- yo update me visual bitch! -------------");
+        
         //HidePressToRebindKeyTransform();
     }
 
@@ -100,7 +104,7 @@ public class OptionsUI : MonoBehaviour
 
     private void UpdateVisual()
     {
-        Debug.Log("updating Visual");
+        // Debug.Log("++++///////////////////// UPDATING Visual ////////////////////++++");
         soundEffectsText.text = "Sound Effects: " + Mathf.Round(SoundManager.Instance.GetVolume() * 10f);
         musicText.text = "Music: " + Mathf.Round(MusicManager.Instance.GetVolume() * 10f);
 
@@ -113,6 +117,8 @@ public class OptionsUI : MonoBehaviour
         //pauseText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Pause);
         //gamepadInteractText.text = PlayerInput.Instance.GetBindingText(PlayerInput.Binding.Gamepad_Interact);
         shootText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Shoot);
+        // WARNING: THE BELOW ISN'T SHOWING
+        Debug.Log("++++///////////////////// THIS AIN'T SHOWING ////////////////////++++");
         secondaryFireText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.SecondaryFire);
         aimText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Aim);
         sprintText.text = StarterAssetsInputs.Instance.GetBindingText(StarterAssetsInputs.PlayerActions.Sprint);

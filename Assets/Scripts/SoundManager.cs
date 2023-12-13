@@ -28,7 +28,7 @@ public class SoundManager : MonoBehaviour
     }
     private void PlaySound(AudioClip[] audioClipArray, Vector3 position, float volumeMultiplier = 1f)
     {
-        Debug.Log("playing sound with volume: " + volumeMultiplier * volume);
+        // Debug.Log("playing sound with volume: " + volumeMultiplier * volume);
         PlaySound(audioClipArray[Random.Range(0, audioClipArray.Length)], position, volumeMultiplier * volume);
     }
     public void PlayCountdownSound(int countdownNumber)
